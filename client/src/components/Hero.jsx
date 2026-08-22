@@ -1,22 +1,26 @@
-
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Container, Button } from 'react-bootstrap'
 import './Hero.css'
 
 function Hero() {
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 })
+  const heroRef = useRef(null)
 
   useEffect(() => {
+    const heroEl = heroRef.current
+    if (!heroEl) return
+
     function handleMouseMove(e) {
-      const x = (e.clientX / window.innerWidth) * 100
-      const y = (e.clientY / window.innerHeight) * 100
+      const rect = heroEl.getBoundingClientRect()
+      const x = ((e.clientX - rect.left) / rect.width) * 100
+      const y = ((e.clientY - rect.top) / rect.height) * 100
       setMousePos({ x, y })
     }
 
-    window.addEventListener('mousemove', handleMouseMove)
+    heroEl.addEventListener('mousemove', handleMouseMove)
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
+      heroEl.removeEventListener('mousemove', handleMouseMove)
     }
   }, [])
 
@@ -25,7 +29,7 @@ function Hero() {
   }
 
   return (
-    <section id="home" className="hero-section">
+    <section id="home" className="hero-section" ref={heroRef}>
       <div className="hero-glow" style={glowStyle}></div>
 
       <Container className="hero-content text-center">

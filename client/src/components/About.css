@@ -1,0 +1,41 @@
+.about-section {
+  padding: 80px 0;
+}
+
+.section-heading {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.about-text {
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.learning-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+}
+
+.learning-heading {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: var(--text-h);
+}
+
+.learning-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.learning-badge {
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 8px 12px;
+}
