@@ -1,9 +1,9 @@
-import { Container, Row, Col } from 'react-bootstrap'
+import { useState } from 'react'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import ProjectCard from './ProjectCard'
 import './Projects.css'
 
-// Empty for now — this is exactly where you'll add real projects later.
-// Example of what one entry will look like once you finish a project:
+// Empty for now — add real projects here later. Example shape:
 //
 // {
 //   title: 'Expense Tracker',
@@ -18,7 +18,16 @@ import './Projects.css'
 
 const projects = []
 
+const filterOptions = ['All', 'Web', 'Android', 'C++', 'Other']
+
 function Projects() {
+  const [activeFilter, setActiveFilter] = useState('All')
+
+  const filteredProjects =
+    activeFilter === 'All'
+      ? projects
+      : projects.filter((project) => project.category === activeFilter)
+
   return (
     <section id="projects" className="projects-section">
       <Container>
@@ -28,13 +37,31 @@ function Projects() {
           learning into real, working software.
         </p>
 
-        {projects.length === 0 ? (
+        <div className="filter-buttons">
+          {filterOptions.map((filter) => (
+            <Button
+              key={filter}
+              variant={activeFilter === filter ? 'light' : 'outline-light'}
+              size="sm"
+              onClick={() => setActiveFilter(filter)}
+              className="filter-btn"
+            >
+              {filter}
+            </Button>
+          ))}
+        </div>
+
+        {filteredProjects.length === 0 ? (
           <div className="projects-empty-state">
-            <p>Projects are currently being built. Check back soon.</p>
+            <p>
+              {projects.length === 0
+                ? 'Projects are currently being built. Check back soon.'
+                : `No ${activeFilter} projects yet. Check back soon.`}
+            </p>
           </div>
         ) : (
           <Row className="g-4">
-            {projects.map((project) => (
+            {filteredProjects.map((project) => (
               <Col key={project.title} md={6} lg={4}>
                 <ProjectCard {...project} />
               </Col>

@@ -72,3 +72,15 @@
   flex: 1 1 auto;
   min-width: 100px;
 }
+
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.filter-btn {
+  min-width: 80px;
+}
