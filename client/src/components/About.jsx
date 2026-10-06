@@ -8,7 +8,7 @@ const currentlyLearning = [
 
 function About() {
   return (
-    <section id="about" className="about-section">
+    <section id="about" className="about-section" data-aos="fade-up">
       <Container>
         <h2 className="section-heading">About Me</h2>
 

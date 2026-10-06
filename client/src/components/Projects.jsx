@@ -29,7 +29,7 @@ function Projects() {
       : projects.filter((project) => project.category === activeFilter)
 
   return (
-    <section id="projects" className="projects-section">
+    <section id="projects" className="projects-section" data-aos="fade-up">
       <Container>
         <h2 className="section-heading">Projects</h2>
         <p className="skills-subtext">

@@ -37,7 +37,7 @@ function GithubSection() {
   }, [])
 
   return (
-    <section id="github" className="github-section">
+    <section id="github" className="github-section" data-aos="fade-up">
       <Container>
         <h2 className="section-heading">GitHub Activity</h2>
 

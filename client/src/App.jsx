@@ -1,3 +1,6 @@
+import { useEffect } from 'react'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
 import './App.css'
 import AppNavbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -7,6 +10,15 @@ import Projects from './components/Projects'
 import GithubSection from './components/GithubSection'
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 600,
+      once: true,
+      offset: 60,
+      disable: 'reduced-motion',
+    })
+  }, [])
+
   return (
     <>
       <AppNavbar />

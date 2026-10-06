@@ -54,7 +54,7 @@ const levelColor = {
 
 function Skills() {
   return (
-    <section id="skills" className="skills-section">
+    <section id="skills" className="skills-section" data-aos="fade-up">
       <Container>
         <h2 className="section-heading">Skills</h2>
         <p className="skills-subtext">
@@ -64,7 +64,7 @@ function Skills() {
 
         <Row className="g-4">
           {skillCategories.map((category) => (
-            <Col key={category.title} md={6} lg={4}>
+<           Col key={category.title} md={6} lg={4} data-aos="fade-up" data-aos-delay={100}>
               <div className="skill-card">
                 <h3 className="skill-card-title">{category.title}</h3>
                 <ul className="skill-list">
