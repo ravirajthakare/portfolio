@@ -1,0 +1,28 @@
+.resume-section {
+  padding: 80px 0;
+}
+
+.resume-subtext {
+  max-width: 550px;
+  margin: 0 auto 32px;
+  color: var(--text);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  line-height: 1.6;
+}
+
+.resume-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.resume-btn {
+  min-width: 170px;
+}
+
+@media (max-width: 480px) {
+  .resume-btn {
+    width: 100%;
+  }
+}

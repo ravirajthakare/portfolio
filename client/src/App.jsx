@@ -9,6 +9,8 @@ import Skills from './components/Skills'
 import Projects from './components/Projects'
 import GithubSection from './components/GithubSection'
 import Book from './components/Book'
+import Resume from './components/Resume'
+import Contact from './components/Contact'
 
 function App() {
   useEffect(() => {
@@ -29,6 +31,8 @@ function App() {
       <Projects />
       <GithubSection />
       <Book />
+      <Resume />
+      <Contact />
     </>
   )
 }
