@@ -11,6 +11,7 @@ import GithubSection from './components/GithubSection'
 import Book from './components/Book'
 import Resume from './components/Resume'
 import Contact from './components/Contact'
+import Footer from './components/Footer'
 
 function App() {
   useEffect(() => {
@@ -33,6 +34,7 @@ function App() {
       <Book />
       <Resume />
       <Contact />
+      <Footer />
     </>
   )
 }
