@@ -20,7 +20,7 @@ const emptyForm = { name: '', email: '', message: '' }
 function Contact() {
   const [formData, setFormData] = useState(emptyForm)
   const [errors, setErrors] = useState({})
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState('idle') // idle | sending | success | error
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -41,18 +41,28 @@ function Contact() {
     return newErrors
   }
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    const newErrors = validate()
-    setErrors(newErrors)
-    setSubmitted(false)
+async function handleSubmit(e) {
+  e.preventDefault()
+  const newErrors = validate()
+  setErrors(newErrors)
+  setStatus('idle')
 
-    if (Object.keys(newErrors).length > 0) return
+  if (Object.keys(newErrors).length > 0) return
 
-    // Phase 15: this is where we will send formData to our Express server.
-    setSubmitted(true)
+  try {
+    setStatus('sending')
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    })
+    if (!res.ok) throw new Error('Request failed')
+    setStatus('success')
     setFormData(emptyForm)
+  } catch {
+    setStatus('error')
   }
+}
 
   return (
     <section id="contact" className="contact-section" data-aos="fade-up">
@@ -86,12 +96,14 @@ function Contact() {
 
           <Col lg={7}>
             <Form onSubmit={handleSubmit} noValidate className="contact-form">
-              {submitted && (
-                <Alert variant="info">
-                  Form checked successfully. Sending messages will be connected
-                  in the next phase (backend).
-                </Alert>
-              )}
+              {status === 'success' && (
+                <Alert variant="success">Thank you! Your message has been received.</Alert>
+                )}
+                    {status === 'error' && (
+                        <Alert variant="danger">
+                         Something went wrong. Please try again, or email me directly.
+                        </Alert>
+                )}
 
               <Form.Group className="mb-3" controlId="contactName">
                 <Form.Label>Name</Form.Label>
@@ -132,9 +144,9 @@ function Contact() {
                 <Form.Control.Feedback type="invalid">{errors.message}</Form.Control.Feedback>
               </Form.Group>
 
-              <Button type="submit" variant="light" className="contact-submit">
-                Send Message
-              </Button>
+              <Button type="submit" variant="light" className="contact-submit" disabled={status === 'sending'}>
+                {status === 'sending' ? 'Sending...' : 'Send Message'}
+                </Button>
             </Form>
           </Col>
         </Row>
